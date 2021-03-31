@@ -1,0 +1,22 @@
+apiVersion: v1
+entries:
+  neo:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2021-03-31T14:11:06.278662218Z"
+    description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
+    digest: 1f932e882835aaef952def9998236cca217f695d041376458d7e33e4dd618bc5
+    home: https://github.com/traefik/neo-helm-chart
+    keywords:
+    - neo
+    kubeVersion: '>= 1.14'
+    maintainers:
+    - name: mmatur
+    name: neo
+    sources:
+    - https://github.com/traefik/neo-agent
+    type: application
+    urls:
+    - https://helm.traefik.io/neo/neo-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-03-31T14:11:06.277675984Z"

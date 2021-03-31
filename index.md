@@ -1,36 +1,71 @@
-# Neo
+# How to install the neo-agent with helm:
 
-[Traefik](https://traefik.io/) 
+## Prerequisities:
+- k3d
+- kubectl
+- gcloud
+- helm v3
 
-## Introduction
+## Procedure:
 
-This chart bootstraps Neo in Kubernetes ingress controller.
-
-## Installing
-
-### Prerequisites
-
-With the command `helm version`, make sure that you have:
-- Helm v3 [installed](https://helm.sh/docs/using_helm/#installing-helm)
-
-Add Neo's chart repository to Helm:
+### Create your cluster:
 
 ```bash
-helm repo add neo https://helm.traefik.io/neo
+k3d cluster create --k3s-server-arg "--no-deploy=traefik" \
+--agents="2" \
+--image="rancher/k3s:v1.20.2-k3s1" \
+--port 80:80@loadbalancer \
+--port 443:443@loadbalancer
 ```
-
-You can update the chart repository by running:
+### Import the neo image
 
 ```bash
-helm repo update
+gcloud auth login
+gcloud auth configure-docker
+docker pull gcr.io/traefiklabs/neo-agent:latest
+k3d image import gcr.io/traefiklabs/neo-agent:latest
 ```
 
-### Deploying Traefik
+### Installation
+
+If you want to install the neo-agent in a specific namespace, you need to:
+- Create the specific namespace:
 
 ```bash
-helm install neo traefik/neo
+kubectl create namespace neo
+```
+- Then launch the installation with the imperative argument --namespace:
+
+```bash
+helm install neo neo/ --namespace neo
+```
+Otherwise if you want the neo-agent in the default namespace, just do:
+
+```bash
+helm install neo neo/
 ```
 
-## Contributing
+When the helm-chart deploy the neo-agent:
+- First: The admission-webhook will create the crds with a job which run the k8s-webhook-cert-manager (https://github.com/newrelic/k8s-webhook-cert-manager). We know have the tls key/cert needed to make the admission-controller working.
+- Second: We can now safely create our deployment with the deployment.yaml and service.yaml follow by the rbac composants.
 
-If you want to contribute to this chart, please read the [Contributing Guide](./CONTRIBUTING.md).
+### Launch unit tests
+You need the helm-plugin: https://github.com/rancher/unittest
+
+Then:
+
+```bash
+helm unittest neo/
+```
+
+### Uninstall
+We consider in this example the version install being <neo>:
+
+```bash
+helm uninstall neo
+```
+If neo-agent was install in a specific namespace
+
+```bash
+helm uninstall neo --namespace specific-namespace
+```

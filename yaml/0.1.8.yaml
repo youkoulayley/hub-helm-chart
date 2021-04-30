@@ -1,0 +1,468 @@
+---
+# Source: neo/templates/rbac/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: neo-agent
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+  annotations:
+---
+# Source: neo/templates/rbac/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: neo-agent
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+rules:
+  # Access Control RBACs.
+  - resources:
+      - ingressclasses
+    apiGroups:
+      - networking.k8s.io
+      - neo.traefik.io
+    verbs:
+      - list
+      - watch
+  - resources:
+      - ingresses
+    apiGroups:
+      - networking.k8s.io
+      - extensions
+    verbs:
+      - list
+      - watch
+      - update
+  - resources:
+      - accesscontrolpolicies
+    apiGroups:
+      - neo.traefik.io
+    verbs:
+      - list
+      - watch
+  - resources:
+      - middlewares
+    apiGroups:
+      - traefik.containo.us
+    verbs:
+      - create
+      - get
+      - update
+      - delete
+  # Other RBACs.
+  - verbs:
+      - list
+    apiGroups:
+      - ""
+    resources:
+      - namespaces
+      - pods
+  - apiGroups:
+      - traefik.containo.us
+    resources:
+      - middlewares
+      - ingressroutes
+      - traefikservices
+      - ingressroutetcps
+      - ingressrouteudps
+      - tlsoptions
+      - tlsstores
+      - serverstransports
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - services
+      - endpoints
+      - secrets
+      - namespaces
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses
+      - ingressclasses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - statefulsets
+      - replicasets
+      - daemonsets
+    verbs:
+      - get
+      - list
+      - watch
+---
+# Source: neo/templates/rbac/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: neo 
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: neo-agent
+subjects:
+  - kind: ServiceAccount
+    name: neo-agent
+    namespace: default
+---
+# Source: neo/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo-agent
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+  annotations:
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      name: neo-agent-webhook
+    - port: 80
+      name: neo-agent-auth
+  selector:
+    app: neo-agent
+---
+# Source: neo/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neo-agent
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+  annotations:
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: neo-agent
+  template:
+    metadata:
+      labels:
+        app: neo-agent
+      annotations:
+    spec:
+      serviceAccountName: neo-agent
+      containers:
+        - name: neo-agent
+          env:
+            - name: DISABLE_GIT_SSL_VERIFY
+              value: "true"
+          image: "mmatur/traefik:agent"
+          imagePullPolicy: IfNotPresent
+          readinessProbe:
+            tcpSocket:
+              port: 443
+            initialDelaySeconds: 5
+            periodSeconds: 20
+          livenessProbe:
+            tcpSocket:
+              port: 443
+            initialDelaySeconds: 5
+            periodSeconds: 20
+          resources:
+          volumeMounts:
+            - mountPath: /var/run/neo-agent/
+              name: neo-certs
+          args:
+            - --token=plop
+            - --auth-server.listen-addr=:80
+            - --acp-server.listen-addr=:443
+            - --acp-server.cert=/var/run/neo-agent/cert.pem
+            - --acp-server.key=/var/run/neo-agent/key.pem
+            - --acp-server.auth-server-addr=http://neo-agent.default.svc.cluster.local
+            - "--log-level=debug"
+            - "--platform-url=https://platform-preview.neo.traefiklabs.tech/agent"
+      volumes:
+        - name: neo-certs 
+          secret:
+            secretName: neo-certs 
+            items:
+              - key: cert
+                path: cert.pem
+              - key: key
+                path: key.pem
+---
+# Source: neo/templates/webhook/00-service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: webhook-cert-sa
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: neo
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "1"
+---
+# Source: neo/templates/webhook/02-cluster-role-patch.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: webhook-cert-cluster-role-patch
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: neo
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "4"
+rules:
+  - verbs:
+      - get
+      - update
+    resources:
+      - mutatingwebhookconfigurations
+    apiGroups:
+      - admissionregistration.k8s.io
+---
+# Source: neo/templates/webhook/02-cluster-role-patch.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: webhook-cert-cluster-role-binding-patch
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "5"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: webhook-cert-cluster-role-patch
+subjects:
+  - kind: ServiceAccount
+    name: webhook-cert-sa
+    namespace: default
+---
+# Source: neo/templates/webhook/01-rbac-role-create.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: webhook-cert-role-create
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: neo
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "2"
+rules:
+  - verbs:
+      - create
+      - get
+    apiGroups:
+      - ""
+    resources:
+      - secrets
+---
+# Source: neo/templates/webhook/01-rbac-role-create.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: webhook-cert-role-binding-create
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "3"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: webhook-cert-role-create
+subjects:
+  - kind: ServiceAccount
+    name: webhook-cert-sa
+    namespace: default
+---
+# Source: neo/templates/webhook/03-job-create-certs.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: webhook-cert-create
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "6"
+spec:
+  template:
+    spec:
+      serviceAccountName: webhook-cert-sa
+      containers:
+        - name: webhook-cert-setup
+          image: docker.io/jettech/kube-webhook-certgen:v1.5.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          args:
+            - create
+            - --host=neo-agent,neo-agent.$(POD_NAMESPACE),neo-agent.$(POD_NAMESPACE).svc
+            - --namespace=$(POD_NAMESPACE)
+            - --secret-name=neo-certs
+      restartPolicy: OnFailure
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+  backoffLimit: 0
+---
+# Source: neo/templates/webhook/04-job-patch-mutatingwebhook.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: webhook-cert-patch
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "7"
+spec:
+  template:
+    spec:
+      serviceAccountName: webhook-cert-sa
+      containers:
+        - name: webhook-cert-setup
+          image: docker.io/jettech/kube-webhook-certgen:v1.5.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          args:
+            - patch
+            - --webhook-name=neo
+            - --namespace=$(POD_NAMESPACE)
+            - --patch-mutating=true
+            - --patch-validating=false
+            - --secret-name=neo-certs
+            - --patch-failure-policy=Ignore
+      restartPolicy: OnFailure
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+  backoffLimit: 10
+---
+# Source: neo/templates/admission-controller.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: neo 
+  namespace: default
+  labels:
+    app.kubernetes.io/name: neo
+    helm.sh/chart: neo-0.1.8
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.1.8
+    app.kubernetes.io/instance: neo
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation
+webhooks:
+  - name: neo-agent.default.svc
+    clientConfig:
+      service:
+        name: neo-agent
+        namespace: default
+        path: /
+    sideEffects: None
+    admissionReviewVersions: [ "v1" ]
+    rules:
+      - operations: [ "CREATE", "UPDATE" ]
+        apiGroups: [ "extensions" ]
+        apiVersions: [ "v1beta1" ]
+        resources: [ "ingresses" ]
+        scope: "Namespaced"
+      - operations: [ "CREATE", "UPDATE" ]
+        apiGroups: [ "networking.k8s.io" ]
+        apiVersions: [ "v1beta1" ]
+        resources: [ "ingresses" ]
+        scope: "Namespaced"
+      - operations: [ "CREATE", "UPDATE" ]
+        apiGroups: [ "networking.k8s.io" ]
+        apiVersions: [ "v1" ]
+        resources: [ "ingresses" ]
+        scope: "Namespaced"
+      - operations: [ "CREATE", "UPDATE" ]
+        apiGroups: [ "traefik.containo.us" ]
+        apiVersions: [ "v1alpha1" ]
+        resources: [ "ingressroutes" ]
+        scope: "Namespaced"

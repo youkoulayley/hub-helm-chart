@@ -3,7 +3,25 @@ entries:
   hub:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.953833049Z"
+    created: "2021-07-06T09:16:35.432520259Z"
+    description: 'Hub is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Hub simplifies networking management through a single, unified view of all your applications. '
+    digest: c11cc29300487b5615eae45e5d2a569bf532f636e7c35e516aac8f98579208c5
+    home: https://github.com/traefik/hub-helm-chart
+    keywords:
+    - hub
+    kubeVersion: '>= 1.14'
+    maintainers:
+    - name: mmatur
+    name: hub
+    sources:
+    - https://github.com/traefik/hub-agent
+    type: application
+    urls:
+    - https://helm.traefik.io/hub/hub-0.3.4.tgz
+    version: 0.3.4
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2021-07-06T09:16:35.431958255Z"
     description: 'Hub is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Hub simplifies networking management through a single, unified view of all your applications. '
     digest: 08bab39f7ee514e34307d35dd632d141ae73243f7faf826da281c9f1394d2c24
     home: https://github.com/traefik/hub-helm-chart
@@ -21,7 +39,7 @@ entries:
     version: 0.3.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.953168645Z"
+    created: "2021-07-06T09:16:35.431406351Z"
     description: 'Hub is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Hub simplifies networking management through a single, unified view of all your applications. '
     digest: a5e23d384a519a905890b3160a655ad0c97cc3f8a5722cf08553c5ee47afe19c
     home: https://github.com/traefik/hub-helm-chart
@@ -39,7 +57,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.952485141Z"
+    created: "2021-07-06T09:16:35.430851247Z"
     description: 'Hub is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Hub simplifies networking management through a single, unified view of all your applications. '
     digest: cbb49a2659013ed8f199551f6c582598b74a8e6e2a4b20c191ec21b24344b31e
     home: https://github.com/traefik/hub-helm-chart
@@ -57,7 +75,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.951214833Z"
+    created: "2021-07-06T09:16:35.430301343Z"
     description: 'Hub is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Hub simplifies networking management through a single, unified view of all your applications. '
     digest: 41a4642b660f182220e8917df0f89336e756e601934abc139a64deccb5646dea
     home: https://github.com/traefik/hub-helm-chart
@@ -75,7 +93,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.949615324Z"
+    created: "2021-07-06T09:16:35.429744339Z"
     description: 'Hub is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Hub simplifies networking management through a single, unified view of all your applications. '
     digest: 25373c9a80ed331e9cceee9d33a1d4b3416edd2e081817abfa8002130bfbe8c6
     home: https://github.com/traefik/hub-helm-chart
@@ -93,7 +111,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.94899152Z"
+    created: "2021-07-06T09:16:35.429234135Z"
     description: 'Hub is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Hub simplifies networking management through a single, unified view of all your applications. '
     digest: 933db3e8864674258dc2a6466101ebac1e8d966f621b9741b232b5b0d3d42bbe
     home: https://github.com/traefik/hub-helm-chart
@@ -112,7 +130,7 @@ entries:
   neo:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.95561806Z"
+    created: "2021-07-06T09:16:35.433845968Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: e0f0178ae9672b033afef56bcdc500ccb81304a90d7f1d0adee57869882133fc
     home: https://github.com/traefik/neo-helm-chart
@@ -130,7 +148,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.961195493Z"
+    created: "2021-07-06T09:16:35.439738511Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: a0b1442f979421197b4cf216b16ea2287fe6ef072ed1edd9efcd4f8b6ee21622
     home: https://github.com/traefik/neo-helm-chart
@@ -148,7 +166,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.960380488Z"
+    created: "2021-07-06T09:16:35.439086406Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: 771fe7ca1712d9d40c6e94da2611a0c3519a3ba6c0760e467cb9b73bede46819
     home: https://github.com/traefik/neo-helm-chart
@@ -166,7 +184,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.959574683Z"
+    created: "2021-07-06T09:16:35.438428201Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: 1e27408ead70e3c23089284baf588d63eb94738b8f21eafae077f37c33fe3411
     home: https://github.com/traefik/neo-helm-chart
@@ -184,7 +202,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.95898828Z"
+    created: "2021-07-06T09:16:35.437759697Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: 47c15f8064a2b1e1d875ddd09298ca23779e6158fb62caf2fc3c6ee5d4c50495
     home: https://github.com/traefik/neo-helm-chart
@@ -202,7 +220,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.958473177Z"
+    created: "2021-07-06T09:16:35.436681189Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: 5d7858b2dd883d680832309bc575be0395e0366abf7082408c96a010591417b6
     home: https://github.com/traefik/neo-helm-chart
@@ -220,7 +238,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.957827873Z"
+    created: "2021-07-06T09:16:35.435858683Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: 97a983d8dd9cba08387e220be702577abe2dcc554473bb1fda4358e51cc74a49
     home: https://github.com/traefik/neo-helm-chart
@@ -238,7 +256,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.956685966Z"
+    created: "2021-07-06T09:16:35.434950576Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: c8322417bfad44b3875cf0770b3502ed344c21b13886ca0289b05090e9546bfe
     home: https://github.com/traefik/neo-helm-chart
@@ -256,7 +274,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.956152063Z"
+    created: "2021-07-06T09:16:35.434296272Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: d4c66ed7f1bba6ad4145afd53853bb5b0cf8eb362f312136af9d51d6f2916b54
     home: https://github.com/traefik/neo-helm-chart
@@ -274,7 +292,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.955031456Z"
+    created: "2021-07-06T09:16:35.433391565Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: 73d2c13808b4c5053160be6bb6aa68e3e556687658137eadaeb386683f82b874
     home: https://github.com/traefik/neo-helm-chart
@@ -292,7 +310,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-07-01T07:56:37.954481153Z"
+    created: "2021-07-06T09:16:35.432921762Z"
     description: 'Neo is a global control plane that monitors, secures, and manages cloud-native applications across any Kubernetes environment, up to the edge. With support for multiple leading ingress and service mesh technologies, Neo simplifies networking management through a single, unified view of all your applications. '
     digest: 0c7888687c4bbab28bcd78af884d1a0f24b040fbe244ae5e14a6dcfc538ab3ad
     home: https://github.com/traefik/neo-helm-chart
@@ -308,4 +326,4 @@ entries:
     urls:
     - https://helm.traefik.io/hub/neo-0.1.0.tgz
     version: 0.1.0
-generated: "2021-07-01T07:56:37.948332216Z"
+generated: "2021-07-06T09:16:35.42856033Z"

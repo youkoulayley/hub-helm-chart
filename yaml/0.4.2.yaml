@@ -1,0 +1,607 @@
+---
+# Source: hub/templates/rbac/service-accounts.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hub-agent-controller
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+---
+# Source: hub/templates/rbac/service-accounts.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hub-agent-auth-server
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+---
+# Source: hub/templates/rbac/cluster-role-auth-server.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hub-agent-auth-server
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+rules:
+  # Access Control RBACs.
+  - resources:
+      - accesscontrolpolicies
+    apiGroups:
+      - hub.traefik.io
+    verbs:
+      - list
+      - watch
+---
+# Source: hub/templates/rbac/cluster-role-controller.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hub-agent-controller
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+rules:
+  # Access Control RBACs.
+  - apiGroups:
+      - networking.k8s.io
+      - hub.traefik.io
+    resources:
+      - ingressclasses
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+      - extensions
+    resources:
+      - ingresses
+    verbs:
+      - list
+      - watch
+      - update
+  - apiGroups:
+      - hub.traefik.io
+    resources:
+      - accesscontrolpolicies
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - traefik.containo.us
+    resources:
+      - middlewares
+    verbs:
+      - create
+      - get
+      - update
+      - delete
+  # Other RBACs.
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+      - pods
+    verbs:
+      - list
+  - apiGroups:
+      - traefik.containo.us
+    resources:
+      - middlewares
+      - ingressroutes
+      - traefikservices
+      - ingressroutetcps
+      - ingressrouteudps
+      - tlsoptions
+      - tlsstores
+      - serverstransports
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - services
+      - endpoints
+      - namespaces
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses
+      - ingressclasses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - statefulsets
+      - replicasets
+      - daemonsets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - create
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - pods/log
+    verbs:
+      - get
+---
+# Source: hub/templates/rbac/cluster-role-bindings.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hub-controller
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hub-agent-controller
+subjects:
+  - kind: ServiceAccount
+    name: hub-agent-controller
+    namespace: default
+---
+# Source: hub/templates/rbac/cluster-role-bindings.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hub-auth-server
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hub-agent-auth-server
+subjects:
+  - kind: ServiceAccount
+    name: hub-agent-auth-server
+    namespace: default
+---
+# Source: hub/templates/services.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hub-agent-controller
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    hub.traefik.io/ingress-controller: none
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      name: hub-agent-webhook
+  selector:
+    app: hub-agent
+    component: controller
+---
+# Source: hub/templates/services.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hub-agent-auth-server
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    hub.traefik.io/ingress-controller: none
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      name: hub-agent-auth
+  selector:
+    app: hub-agent
+    component: auth-server
+---
+# Source: hub/templates/deployment-auth-server.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hub-agent-auth-server
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    hub.traefik.io/ingress-controller: none
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hub-agent
+      component: auth-server
+  template:
+    metadata:
+      labels:
+        app: hub-agent
+        component: auth-server
+      annotations:
+    spec:
+      serviceAccountName: hub-agent-auth-server
+      containers:
+        - name: hub-agent-auth-server
+          env:
+            - name: DISABLE_GIT_SSL_VERIFY
+              value: "true"
+          image: "ghcr.io/traefik/hub-agent:latest"
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /_ready
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /_live
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 20
+          resources:
+          args:
+            - auth-server
+            - --listen-addr=:80
+            - "--log-level=debug"
+---
+# Source: hub/templates/deployment-controller.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hub-agent-controller
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    hub.traefik.io/ingress-controller: none
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hub-agent
+      component: controller
+  template:
+    metadata:
+      labels:
+        app: hub-agent
+        component: controller
+      annotations:
+    spec:
+      serviceAccountName: hub-agent-controller
+      containers:
+        - name: hub-agent-controller
+          env:
+            - name: DISABLE_GIT_SSL_VERIFY
+              value: "true"
+          image: "ghcr.io/traefik/hub-agent:latest"
+          imagePullPolicy: Always
+          resources:
+          volumeMounts:
+            - mountPath: /var/run/hub-agent/
+              name: hub-certs
+          args:
+            - controller
+            - --token=plop
+            - --acp-server.listen-addr=:443
+            - --acp-server.cert=/var/run/hub-agent/cert.pem
+            - --acp-server.key=/var/run/hub-agent/key.pem
+            - --acp-server.auth-server-addr=http://hub-agent-auth-server.default.svc.cluster.local
+            - "--log-level=debug"
+      volumes:
+        - name: hub-certs
+          secret:
+            secretName: hub-certs
+            items:
+              - key: cert
+                path: cert.pem
+              - key: key
+                path: key.pem
+---
+# Source: hub/templates/webhook/00-service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: webhook-cert-sa
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: hub
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "1"
+---
+# Source: hub/templates/webhook/02-cluster-role-patch.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: webhook-cert-cluster-role-patch
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: hub
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "4"
+rules:
+  - verbs:
+      - get
+      - update
+    resources:
+      - mutatingwebhookconfigurations
+    apiGroups:
+      - admissionregistration.k8s.io
+---
+# Source: hub/templates/webhook/02-cluster-role-patch.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: webhook-cert-cluster-role-binding-patch
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "5"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: webhook-cert-cluster-role-patch
+subjects:
+  - kind: ServiceAccount
+    name: webhook-cert-sa
+    namespace: default
+---
+# Source: hub/templates/webhook/01-rbac-role-create.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: webhook-cert-role-create
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: hub
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "2"
+rules:
+  - verbs:
+      - create
+      - get
+    apiGroups:
+      - ""
+    resources:
+      - secrets
+---
+# Source: hub/templates/webhook/01-rbac-role-create.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: webhook-cert-role-binding-create
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "3"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: webhook-cert-role-create
+subjects:
+  - kind: ServiceAccount
+    name: webhook-cert-sa
+    namespace: default
+---
+# Source: hub/templates/webhook/03-job-create-certs.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: webhook-cert-create
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "6"
+spec:
+  template:
+    spec:
+      serviceAccountName: webhook-cert-sa
+      containers:
+        - name: webhook-cert-setup
+          image: docker.io/jettech/kube-webhook-certgen:v1.5.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          args:
+            - create
+            - --host=hub-agent-controller,hub-agent-controller.$(POD_NAMESPACE),hub-agent-controller.$(POD_NAMESPACE).svc
+            - --namespace=$(POD_NAMESPACE)
+            - --secret-name=hub-certs
+      restartPolicy: OnFailure
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+  backoffLimit: 0
+---
+# Source: hub/templates/webhook/04-job-patch-mutatingwebhook.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: webhook-cert-patch
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: "7"
+spec:
+  template:
+    spec:
+      serviceAccountName: webhook-cert-sa
+      containers:
+        - name: webhook-cert-setup
+          image: docker.io/jettech/kube-webhook-certgen:v1.5.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          args:
+            - patch
+            - --webhook-name=hub
+            - --namespace=$(POD_NAMESPACE)
+            - --patch-mutating=true
+            - --patch-validating=false
+            - --secret-name=hub-certs
+            - --patch-failure-policy=Ignore
+      restartPolicy: OnFailure
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+  backoffLimit: 10
+---
+# Source: hub/templates/admission-controller.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: hub
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.4.2
+    app.kubernetes.io/instance: hub
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation
+webhooks:
+  - name: hub-agent.default.svc
+    clientConfig:
+      service:
+        name: hub-agent-controller
+        namespace: default
+        path: /
+    sideEffects: None
+    admissionReviewVersions: [ "v1" ]
+    rules:
+      - operations: [ "CREATE", "UPDATE", "DELETE" ]
+        apiGroups: [ "extensions" ]
+        apiVersions: [ "v1beta1" ]
+        resources: [ "ingresses" ]
+        scope: "Namespaced"
+      - operations: [ "CREATE", "UPDATE", "DELETE" ]
+        apiGroups: [ "networking.k8s.io" ]
+        apiVersions: [ "v1beta1" ]
+        resources: [ "ingresses" ]
+        scope: "Namespaced"
+      - operations: [ "CREATE", "UPDATE", "DELETE" ]
+        apiGroups: [ "networking.k8s.io" ]
+        apiVersions: [ "v1" ]
+        resources: [ "ingresses" ]
+        scope: "Namespaced"
+      - operations: [ "CREATE", "UPDATE", "DELETE" ]
+        apiGroups: [ "traefik.containo.us" ]
+        apiVersions: [ "v1alpha1" ]
+        resources: [ "ingressroutes" ]
+        scope: "Namespaced"

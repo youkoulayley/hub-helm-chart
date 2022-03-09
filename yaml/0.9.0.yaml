@@ -7,9 +7,9 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
   annotations:
 ---
@@ -21,9 +21,23 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
+    app.kubernetes.io/instance: hub
+  annotations:
+---
+# Source: hub/templates/rbac/service-accounts.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hub-agent-tunnel
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.9.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
   annotations:
 ---
@@ -35,13 +49,13 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
 data:
-  cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQU83YktBekJGZU5CamN5QThYZHllckV3RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpBeU1UUXdOalV4V2hnUE1qRXlNakF6TURNeE5EQTJOVEZhTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQXhzOWRVemp0OGwwRzZvOVZxY25jeVE4VHJSLzJXeUt6WW5LRXltVzRtMWpDdVdKUQpwaHNWUkxER1pxOWdqdFdoYUR4bWhJK1NDS3hmTFpjL0RFQ1RRRW9vMTVKaitoSWxoamoxaGR6L0dleHZ5aHJoCm1Ib3NFb3d2VnczWUR0M1BPaGNiVjB2d1h5MkhpMVMzYUQxMGZ5SWZ2QjZIQzlzU1RraHNoMlhad0N2MWNHUUEKcnE3V3dvRkpmazFheXZSdFdNNnVsaVcweEMzUFB5WEdWdTEyd3QrQnZRbU9WMCt0aThVWDMzdUluM1NaMlV5VgpsR2prbmdsbHpxSHJ4KzAva2VpVzhwUjdLSUg1YmNmY0lZWVpSRnF3OWxpL2hZVlhsVGxhMHhHTnZHbGg0RmlUCklxMjRRVUlaRUZFL1dqMlJmdmtDbTZ6WkY4UkdWYy9lSFpnb0F3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFHQ2JycE02YkozK1hBR0ZvYkFuYnB2dVc4L0NnRnQ2LzlNZUlWRUQKeENzQjNOemdHa2VLd2RVc012WDBFL0xrSGZ3NG9mRDJ0OHBoeDRKczNqRWhwZEw0eWxsWmt4ZFdqZUpWQ0Y1QQpzUWp2V0FNVWFNanJ2bjRNQ2NCcDNGaWhIMUFSSm8zc2VxRTVEcXNDdE4xUUtFU3d4SGcwYlF5SllZUG5aUUVKCmN4cXRUbER5eHlYZkU0YUcxSURrYTB6bEVFSlZ5UFJQaVdZM1JLWURWRGx3RmJDSjFpNkhnTmRSL2I3ZDlnR24KY0s4QU14TlE5M1RVQVF6cWxBTVpYamlNL0xxUXRFNjZmeXdiM0tLZXFZa01ZWlpobkRBbW1iR1BZNEFORzBRQwppbDByWC94WnRlS0xZOUVod1VJTXlxSllQN3UzVDA3cWRCNjdNUkRtSkZkNWtOND0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
-  key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBeHM5ZFV6anQ4bDBHNm85VnFjbmN5UThUclIvMld5S3pZbktFeW1XNG0xakN1V0pRCnBoc1ZSTERHWnE5Z2p0V2hhRHhtaEkrU0NLeGZMWmMvREVDVFFFb28xNUpqK2hJbGhqajFoZHovR2V4dnlocmgKbUhvc0Vvd3ZWdzNZRHQzUE9oY2JWMHZ3WHkySGkxUzNhRDEwZnlJZnZCNkhDOXNTVGtoc2gyWFp3Q3YxY0dRQQpycTdXd29GSmZrMWF5dlJ0V002dWxpVzB4QzNQUHlYR1Z1MTJ3dCtCdlFtT1YwK3RpOFVYMzN1SW4zU1oyVXlWCmxHamtuZ2xsenFIcngrMC9rZWlXOHBSN0tJSDViY2ZjSVlZWlJGcXc5bGkvaFlWWGxUbGEweEdOdkdsaDRGaVQKSXEyNFFVSVpFRkUvV2oyUmZ2a0NtNnpaRjhSR1ZjL2VIWmdvQXdJREFRQUJBb0lCQVFDdkpHazc4ckEwemwxVQpjRmR3RDRSd245YWVzc1N1UHVDM1B0bmJFRWZVbXhwWWhOTTFzakJIWmxBeWtCZkpYVXduYnVhRnE1RmtFSzU4CmxIeVhoNS94aUNONDNkOHpvNTdwSXU2eE1pS09MT3ZDcVhIS2lQNmdqRno4SFJjVTZiVXdvTUNXWkREck9FbnIKcGdNNVVzSjVhWTk1ZzQ5SEU0U0o4R1dqMWtkQmNpaVVzWWgwazU0V25rMzROTy9wbnNtOEdpZnNpckQ2NllycgpMQ3dzUi9EVjBCbWdIMWxYc3dJejVsOStRQ29DazJCMFloN1U1aU1SRG5iV29BVmQ3Y3lkcjRBNlhxakFkU3Z2CkxOYThSTkZGNUhXYVVyTW83blA4SFJiOVE0eE5QWlVtK1JpMjJYaGFFR2lsSndjOWkvdnZlTzlSQzNBQ2xmU3MKaUJITmhLdlpBb0dCQVB1dHE5OEw5NWNpZWJpYlJSbTJjWWQvWWtEMlE0Y0pVTnpBUFVKSUVxWVZKQ3Q1VEJKcQo1TXJNVzcxaUErUjBFZS9USkN3NG1WNWZvRksrTFFhR3NUWTA3dkpXR0wraUpFQ1ZteWVNSElyNk82b1BhWWlNCmVXUVlBWEVERkk3bmVHbmQyVk95Q2VaMmM5cExCRURoRDlsT0NmN0sxd3Q5cHZ5YkNwNHNJM1J0QW9HQkFNbzUKUzA5cXJZMkE5bnpoNy94eWlFUVN5ck5USXQ1LzVyTFBpb1Z5eEVrRDlnbVY1enpMc25USnZZWDUvWWZnZnpwcQpaRGkyYW94QmFQSkQ1R3Fack9ZRmlpR2txMG1GT3pnTktaMkNJN1ZPV1JqNHlOcUdSTDRxeWY5RmpnV2JvL3FGCmVsVHpKOG9Qc0pDZ0VLWTNKbTZsVy9BMmdUQVljeGNYTFdMdC8rZ3ZBb0dCQU92RHNIcmN5ZzV4aEZjMFZSSVcKUDludnNjb3JKKzBMQkE0WHBBdEFXdi9zVkJySm9VS3JraktNSi9DTUxodEh4RG5Hc0Y4Z2trTy9Ed0FVR1RmQQoyNmR0Qk41Tld4ZkJ1M1lvNzlTblEySEpzalRJQlZPZVRHVkF1N0R6Y3NIQUFxUWg1K0dvcWUrVHpVbVQ5cU1VCmNuVmR6cTA1dFNPVmpPV2NFK0ZDZGVBdEFvR0FEMUV2cHlCSmJRSnJxU0hqNzVjdFF4cTVSOFB3VERJYjQwZGQKRXFhU3Y0VVJTY0NVOTBIbWpub0paUEIraDZBMWd0TTBMQ2VGQW9LaDFGZllJVXJxa2JHeHVNS2tScmxVdHZZbwpSTW5xc256d3VyZDlYeS8wWFFNWXNjRXU5TFhKUWR5Q1c1VGZXcXE5a1BiT3pBZzVYUUFoYXB4MlJKSlZoVlk0CkZkbzVHL2tDZ1lFQXJXWXdzckhtem5kSHlhYWFQZlRIRGVWK0l1QVVaVzZQQU45bElrZ0lTT0FFWklNU0F6R0YKdEh2UGRvUmttQlhHRnNlbm5ueTRCSTgreVdVelRaVTRBSDZ2UlB3S3crZnNQSXZOa2JNbjBNZGVNWEF3WDdtVgpWd1ZJQ0pGT0xTd0w0K0t3ZzROa3ZaRGkyUFZCS3d1bFlHWDJBb0E5Qmo4Y0RYVUdrU3E1SjNnPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ==
+  cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQUlVbWNQYkVtRnRGQzZBWkRQVmtQMW93RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpBNU1UUXlPRFF4V2hnUE1qRXlNakF6TVRBeE5ESTROREZhTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQTZ3UEorK1NlWXd2S0E5ZzRZSmlrUXpXb2I4SlV3WDZvRlZaRE5kNS9scXk2QytGTwpFcUlqU3ZVanNQWGNweHVqcE1iWkVIWkJ0RWRkeG5MNzR5dXNlYzg4Mnp5QWY0UDA0eWNmcEVPY1Z4TTc5aW5BCml3bWcwZ0FnY0ZqTldrdERKU2R3c3RnZ0kzSTc2U3ZSVnQ4amY4NC81TWJzdlBiZ0ZSdGxoNGg3a3dqQnQzclkKN2FRV2E2TGlzSjhlOUZQOHpXeWhMUGp3Y3R3UDNFUmNVMTJuUVhxSEJQSUxPVko3R1ZBVHdKc21ENlNrcXVQbApSUS80MllMaEhTNEJDSmdEUU1HTFhKT25ndE9pMk9QaDRMV0QxS2YxVjFwS21lYTI2bWlvanAveVVtSTFpdjh2Cm9Rcy9kamdFL2I2bm5qQ2xCN1hUNHo3ZzhaVVlaeUhxbVNlWkV3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFFSFR0eHZzTk5hRHo5eUhYU0VmN1BTYk04N1JocmpHeG53M0R3alkKeEkvaFdVc21tSUpiaHBJTk84bEQ3Q1FHVTZua0diNGQxY3dnbWRWQ2V2bmdjREp0MGltcDNwM3RoK3BLV0FVaApwdTRJSVhIK2oxcUtpNnZZbHpvMGxEbEVKMmM0YXBQZzBwa2cvMm4zd3BkM3NHK3JvenpPY2tadmVJaEFPS1ZkCkdjeGxYckxQbjNYVmdGQWtQcDlQWnJOV0d6eFhQQjhCLzR2QW5XQ09LVlRLd3NWUFNJVUFXV3dwdWRrOTFLZWkKcGNtcWkyUDFLOTRBUWV5eEFrZEp1RTIwcHZ2U0x4TEdZUzU3T1NQbThxeUJjSnpwNWJFcHlROVBuclZLbTQrMgpxQW5wajk5V3JYNzNUOENJc0dDYmgrUXBqUmJxcEZ0ZDdTNTVTM2tpOWl4NjE0dz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+  key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBNndQSisrU2VZd3ZLQTlnNFlKaWtReldvYjhKVXdYNm9GVlpETmQ1L2xxeTZDK0ZPCkVxSWpTdlVqc1BYY3B4dWpwTWJaRUhaQnRFZGR4bkw3NHl1c2VjODgyenlBZjRQMDR5Y2ZwRU9jVnhNNzlpbkEKaXdtZzBnQWdjRmpOV2t0REpTZHdzdGdnSTNJNzZTdlJWdDhqZjg0LzVNYnN2UGJnRlJ0bGg0aDdrd2pCdDNyWQo3YVFXYTZMaXNKOGU5RlA4eld5aExQandjdHdQM0VSY1UxMm5RWHFIQlBJTE9WSjdHVkFUd0pzbUQ2U2txdVBsClJRLzQyWUxoSFM0QkNKZ0RRTUdMWEpPbmd0T2kyT1BoNExXRDFLZjFWMXBLbWVhMjZtaW9qcC95VW1JMWl2OHYKb1FzL2RqZ0UvYjZubmpDbEI3WFQ0ejdnOFpVWVp5SHFtU2VaRXdJREFRQUJBb0lCQVFDTmRjSm10TDRCc0Y3dwo0WDFONTVNNFFWd1pxVWVMRU1ucnpmaTJ2QzdnYXlleGJ2U25rcURieGFLdUtjK2ZacXVoeTI5czBVSExXZ25BCklnWXNQMldhREh2OUd2WGR5M2ZrSXZDUTE0R0xpREJYZzlvNTFwbk96ZlM0cXpzd1ZvMGNHQmxtRFdHSzlIL0wKWW15bmRialFmVDFJWDlTd0NZbm9LbzE2ZjFTaXMwTmJGRUQwQUoyQkkvQTBIMEozSHlYWlRBVEZDL3FVYUJCYQpEcGZrelJ1a0ZqWnkxWXdtbzVobXllSEJrREdkbGpDRTNHdlVnUnR1SVJTR1ZnSkZFOW5lSHJYNjBySUhXMlVWCjJlTlFwcmxLRkhabW00enBuL2RzaWVzQlNqWW5mUzI2a2Z5NnV1LzlkOWZLOWw1Y2x6QzJjSXBqVytIZlRBOG8KTDBFVVZadkJBb0dCQVBkN3ZJa3VCblIxd2hRYjNOUXdSRVJEemYvVlNxbDFQdjVST25QM2NSN1QvdmRLUWJMWApwRWRKUStwazZScjdMT29tcUpMR0FmZlY5cFVzWWkxR2pUUTljSUNHeURaczhBelJncFhNYW5MRDBzUzRNMm9lCkN5MzRqZjRyNkJELzVoK0tyVHZmTmNjVUlHUmdUcis2cWpkbmxuaWFCQnR4YWR6K3YwaWhMdkIvQW9HQkFQTWEKTlRuV2pYb1R4YzA3R2t5eWdOQ0ZKSWtKNTdNR3U5TDRWR1VrNlhlTURLYkYrdzlCaTd4dytVS3J5amM1TElPUgpzcXgySlJ0eHZNVDJMZGRzakV1TU4ydkEwT25VY0dnVEhxNUo2T0ZNSXMxSkhSZ0FObnhhQ3JEMVMrWEdwdTlnCmhlelNXSEFTNjdsUEcyM2RyS2YrdE1SSnAvaEJHcE93cWMxTHEwMXRBb0dCQUlzcWJKR2piUVBPT0UzQWdVUmMKdy9helBrTFB1UVZqcGdHeXdiRDJnd2ozNDFkQnpZSDVHeXJ1K3g3eWtkYVhTZUY5emF1RFp4WHJucGF4OTU5SQpIaDB6TTNGQzJaRXBYeStHSE8ySm5vNWNxY2Z2WVJJYVJPVWI4UlR0c2JqbGZZMWRHUjhpM0lYUFBvdlRVRlVtCmJaTnNUOFFQcjZHUy9CbkdzdC92cTRxWEFvR0JBTGpNVkdlNk5HUDNnZWJJSmU3bHhzdzhXaENlYWZhS2lOOFEKRFQreDlwUDg3MlViblFUMDQ1K0ZGY1pieHVXQjNkZktPdE9sSUFJanpNYkJDUW40cHhHSzdscElBY2V1eVNBawpZSzlHMmZQaUo1WjhITlN3M0xwY3pFSEd4a0pPWjNvU210dnk3bTJMeEl0aW1reEROY3VpOEpGQ0dLQzhCTkwrCmVhWG8vcmhsQW9HQVE0NllEOTVOMzcvWUU5VU5hU2c1OGJybFpJcmJLVHVoaHJiZGFDTjcxT0JBdUFsMVpKQy8KTTk4cWhPaWlMclZzQ3pFODhUbENkbnR4Ym5iMkR0WXovdVNLRDBFZFlBNURKVnY3c1NxQXgya2pCSitGY0V2ZwphNXNxQVVXZUVUZWtYVXUyWFJJeEIzVkJhYnhYdnFDOTF1WldsdEVwM1RTNlkra1Z5RzhPa3pBPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ==
 ---
 # Source: hub/templates/rbac/cluster-role-auth-server.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -50,9 +64,9 @@ metadata:
   name: hub-agent-auth-server
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
 rules:
   # Access Control RBACs.
@@ -71,9 +85,9 @@ metadata:
   name: hub-agent-controller
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
 rules:
   # Access Control RBACs.
@@ -190,9 +204,9 @@ metadata:
   name: hub-controller
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -210,9 +224,9 @@ metadata:
   name: hub-auth-server
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -231,9 +245,9 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
   annotations:
     hub.traefik.io/ingress-controller: none
@@ -254,9 +268,9 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
   annotations:
     hub.traefik.io/ingress-controller: none
@@ -277,9 +291,9 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
   annotations:
     hub.traefik.io/ingress-controller: none
@@ -330,9 +344,9 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
   annotations:
     hub.traefik.io/ingress-controller: none
@@ -379,6 +393,45 @@ spec:
               - key: key
                 path: key.pem
 ---
+# Source: hub/templates/deployment-tunnel.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hub-agent-tunnel
+  namespace: default
+  labels:
+    app.kubernetes.io/name: hub
+    helm.sh/chart: hub-0.9.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.9.0
+    app.kubernetes.io/instance: hub
+    app.kubernetes.io/component: tunnel
+  annotations:
+    hub.traefik.io/ingress-controller: none
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hub-agent
+      component: tunnel
+  template:
+    metadata:
+      labels:
+        app: hub-agent
+        component: tunnel
+      annotations:
+    spec:
+      serviceAccountName: hub-agent-tunnel
+      containers:
+        - name: hub-agent-tunnel
+          image: "ghcr.io/traefik/hub-agent:latest"
+          imagePullPolicy: Always
+          resources:
+          args:
+            - tunnel
+            - --token=plop
+            - "--log-level=debug"
+---
 # Source: hub/templates/admission-controller.yaml
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
@@ -387,9 +440,9 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
 webhooks:
   - name: hub-agent.default.svc
@@ -398,7 +451,7 @@ webhooks:
         name: hub-agent-controller
         namespace: default
         path: /
-      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQU83YktBekJGZU5CamN5QThYZHllckV3RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpBeU1UUXdOalV4V2hnUE1qRXlNakF6TURNeE5EQTJOVEZhTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQXhzOWRVemp0OGwwRzZvOVZxY25jeVE4VHJSLzJXeUt6WW5LRXltVzRtMWpDdVdKUQpwaHNWUkxER1pxOWdqdFdoYUR4bWhJK1NDS3hmTFpjL0RFQ1RRRW9vMTVKaitoSWxoamoxaGR6L0dleHZ5aHJoCm1Ib3NFb3d2VnczWUR0M1BPaGNiVjB2d1h5MkhpMVMzYUQxMGZ5SWZ2QjZIQzlzU1RraHNoMlhad0N2MWNHUUEKcnE3V3dvRkpmazFheXZSdFdNNnVsaVcweEMzUFB5WEdWdTEyd3QrQnZRbU9WMCt0aThVWDMzdUluM1NaMlV5VgpsR2prbmdsbHpxSHJ4KzAva2VpVzhwUjdLSUg1YmNmY0lZWVpSRnF3OWxpL2hZVlhsVGxhMHhHTnZHbGg0RmlUCklxMjRRVUlaRUZFL1dqMlJmdmtDbTZ6WkY4UkdWYy9lSFpnb0F3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFHQ2JycE02YkozK1hBR0ZvYkFuYnB2dVc4L0NnRnQ2LzlNZUlWRUQKeENzQjNOemdHa2VLd2RVc012WDBFL0xrSGZ3NG9mRDJ0OHBoeDRKczNqRWhwZEw0eWxsWmt4ZFdqZUpWQ0Y1QQpzUWp2V0FNVWFNanJ2bjRNQ2NCcDNGaWhIMUFSSm8zc2VxRTVEcXNDdE4xUUtFU3d4SGcwYlF5SllZUG5aUUVKCmN4cXRUbER5eHlYZkU0YUcxSURrYTB6bEVFSlZ5UFJQaVdZM1JLWURWRGx3RmJDSjFpNkhnTmRSL2I3ZDlnR24KY0s4QU14TlE5M1RVQVF6cWxBTVpYamlNL0xxUXRFNjZmeXdiM0tLZXFZa01ZWlpobkRBbW1iR1BZNEFORzBRQwppbDByWC94WnRlS0xZOUVod1VJTXlxSllQN3UzVDA3cWRCNjdNUkRtSkZkNWtOND0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQUlVbWNQYkVtRnRGQzZBWkRQVmtQMW93RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpBNU1UUXlPRFF4V2hnUE1qRXlNakF6TVRBeE5ESTROREZhTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQTZ3UEorK1NlWXd2S0E5ZzRZSmlrUXpXb2I4SlV3WDZvRlZaRE5kNS9scXk2QytGTwpFcUlqU3ZVanNQWGNweHVqcE1iWkVIWkJ0RWRkeG5MNzR5dXNlYzg4Mnp5QWY0UDA0eWNmcEVPY1Z4TTc5aW5BCml3bWcwZ0FnY0ZqTldrdERKU2R3c3RnZ0kzSTc2U3ZSVnQ4amY4NC81TWJzdlBiZ0ZSdGxoNGg3a3dqQnQzclkKN2FRV2E2TGlzSjhlOUZQOHpXeWhMUGp3Y3R3UDNFUmNVMTJuUVhxSEJQSUxPVko3R1ZBVHdKc21ENlNrcXVQbApSUS80MllMaEhTNEJDSmdEUU1HTFhKT25ndE9pMk9QaDRMV0QxS2YxVjFwS21lYTI2bWlvanAveVVtSTFpdjh2Cm9Rcy9kamdFL2I2bm5qQ2xCN1hUNHo3ZzhaVVlaeUhxbVNlWkV3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFFSFR0eHZzTk5hRHo5eUhYU0VmN1BTYk04N1JocmpHeG53M0R3alkKeEkvaFdVc21tSUpiaHBJTk84bEQ3Q1FHVTZua0diNGQxY3dnbWRWQ2V2bmdjREp0MGltcDNwM3RoK3BLV0FVaApwdTRJSVhIK2oxcUtpNnZZbHpvMGxEbEVKMmM0YXBQZzBwa2cvMm4zd3BkM3NHK3JvenpPY2tadmVJaEFPS1ZkCkdjeGxYckxQbjNYVmdGQWtQcDlQWnJOV0d6eFhQQjhCLzR2QW5XQ09LVlRLd3NWUFNJVUFXV3dwdWRrOTFLZWkKcGNtcWkyUDFLOTRBUWV5eEFrZEp1RTIwcHZ2U0x4TEdZUzU3T1NQbThxeUJjSnpwNWJFcHlROVBuclZLbTQrMgpxQW5wajk5V3JYNzNUOENJc0dDYmgrUXBqUmJxcEZ0ZDdTNTVTM2tpOWl4NjE0dz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
     sideEffects: None
     admissionReviewVersions: [ "v1" ]
     rules:
@@ -431,9 +484,9 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.8.2
+    helm.sh/chart: hub-0.9.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.8.2
+    app.kubernetes.io/version: 0.9.0
     app.kubernetes.io/instance: hub
 webhooks:
   - name: hub-agent.default.svc
@@ -442,7 +495,7 @@ webhooks:
         name: hub-agent-controller
         namespace: default
         path: /validation
-      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQU83YktBekJGZU5CamN5QThYZHllckV3RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpBeU1UUXdOalV4V2hnUE1qRXlNakF6TURNeE5EQTJOVEZhTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQXhzOWRVemp0OGwwRzZvOVZxY25jeVE4VHJSLzJXeUt6WW5LRXltVzRtMWpDdVdKUQpwaHNWUkxER1pxOWdqdFdoYUR4bWhJK1NDS3hmTFpjL0RFQ1RRRW9vMTVKaitoSWxoamoxaGR6L0dleHZ5aHJoCm1Ib3NFb3d2VnczWUR0M1BPaGNiVjB2d1h5MkhpMVMzYUQxMGZ5SWZ2QjZIQzlzU1RraHNoMlhad0N2MWNHUUEKcnE3V3dvRkpmazFheXZSdFdNNnVsaVcweEMzUFB5WEdWdTEyd3QrQnZRbU9WMCt0aThVWDMzdUluM1NaMlV5VgpsR2prbmdsbHpxSHJ4KzAva2VpVzhwUjdLSUg1YmNmY0lZWVpSRnF3OWxpL2hZVlhsVGxhMHhHTnZHbGg0RmlUCklxMjRRVUlaRUZFL1dqMlJmdmtDbTZ6WkY4UkdWYy9lSFpnb0F3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFHQ2JycE02YkozK1hBR0ZvYkFuYnB2dVc4L0NnRnQ2LzlNZUlWRUQKeENzQjNOemdHa2VLd2RVc012WDBFL0xrSGZ3NG9mRDJ0OHBoeDRKczNqRWhwZEw0eWxsWmt4ZFdqZUpWQ0Y1QQpzUWp2V0FNVWFNanJ2bjRNQ2NCcDNGaWhIMUFSSm8zc2VxRTVEcXNDdE4xUUtFU3d4SGcwYlF5SllZUG5aUUVKCmN4cXRUbER5eHlYZkU0YUcxSURrYTB6bEVFSlZ5UFJQaVdZM1JLWURWRGx3RmJDSjFpNkhnTmRSL2I3ZDlnR24KY0s4QU14TlE5M1RVQVF6cWxBTVpYamlNL0xxUXRFNjZmeXdiM0tLZXFZa01ZWlpobkRBbW1iR1BZNEFORzBRQwppbDByWC94WnRlS0xZOUVod1VJTXlxSllQN3UzVDA3cWRCNjdNUkRtSkZkNWtOND0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQUlVbWNQYkVtRnRGQzZBWkRQVmtQMW93RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpBNU1UUXlPRFF4V2hnUE1qRXlNakF6TVRBeE5ESTROREZhTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQTZ3UEorK1NlWXd2S0E5ZzRZSmlrUXpXb2I4SlV3WDZvRlZaRE5kNS9scXk2QytGTwpFcUlqU3ZVanNQWGNweHVqcE1iWkVIWkJ0RWRkeG5MNzR5dXNlYzg4Mnp5QWY0UDA0eWNmcEVPY1Z4TTc5aW5BCml3bWcwZ0FnY0ZqTldrdERKU2R3c3RnZ0kzSTc2U3ZSVnQ4amY4NC81TWJzdlBiZ0ZSdGxoNGg3a3dqQnQzclkKN2FRV2E2TGlzSjhlOUZQOHpXeWhMUGp3Y3R3UDNFUmNVMTJuUVhxSEJQSUxPVko3R1ZBVHdKc21ENlNrcXVQbApSUS80MllMaEhTNEJDSmdEUU1HTFhKT25ndE9pMk9QaDRMV0QxS2YxVjFwS21lYTI2bWlvanAveVVtSTFpdjh2Cm9Rcy9kamdFL2I2bm5qQ2xCN1hUNHo3ZzhaVVlaeUhxbVNlWkV3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFFSFR0eHZzTk5hRHo5eUhYU0VmN1BTYk04N1JocmpHeG53M0R3alkKeEkvaFdVc21tSUpiaHBJTk84bEQ3Q1FHVTZua0diNGQxY3dnbWRWQ2V2bmdjREp0MGltcDNwM3RoK3BLV0FVaApwdTRJSVhIK2oxcUtpNnZZbHpvMGxEbEVKMmM0YXBQZzBwa2cvMm4zd3BkM3NHK3JvenpPY2tadmVJaEFPS1ZkCkdjeGxYckxQbjNYVmdGQWtQcDlQWnJOV0d6eFhQQjhCLzR2QW5XQ09LVlRLd3NWUFNJVUFXV3dwdWRrOTFLZWkKcGNtcWkyUDFLOTRBUWV5eEFrZEp1RTIwcHZ2U0x4TEdZUzU3T1NQbThxeUJjSnpwNWJFcHlROVBuclZLbTQrMgpxQW5wajk5V3JYNzNUOENJc0dDYmgrUXBqUmJxcEZ0ZDdTNTVTM2tpOWl4NjE0dz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
     sideEffects: None
     admissionReviewVersions: [ "v1" ]
     rules:

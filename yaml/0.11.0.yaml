@@ -1,72 +1,72 @@
 ---
-# Source: hub/templates/rbac/service-accounts.yaml
+# Source: hub-agent/templates/rbac/service-accounts.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: hub-agent-controller
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
   annotations:
 ---
-# Source: hub/templates/rbac/service-accounts.yaml
+# Source: hub-agent/templates/rbac/service-accounts.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: hub-agent-auth-server
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
   annotations:
 ---
-# Source: hub/templates/rbac/service-accounts.yaml
+# Source: hub-agent/templates/rbac/service-accounts.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: hub-agent-tunnel
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
   annotations:
 ---
-# Source: hub/templates/admission-controller.yaml
+# Source: hub-agent/templates/admission-controller.yaml
 apiVersion: v1
 kind: Secret
 metadata:
   name: hub-agent-certs
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
 data:
-  cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQUtWMlFIMW4xN3VnbkwwUFR1Y0F3anN3RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpFM01UTXhPVFV6V2hnUE1qRXlNakF6TVRneE16RTVOVE5hTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQTBtMGpjSnplUmp3MGs0RUMyS3VmZm1KbDR1OE40eTFPRDJDd0lHeUx6MXVlcWsySgo3SWtrZXI2L21ubEkydHd6eG5NMVBnQTdkRWtsQzBYWHVURzg1cHlQdU9zZWtmclNNeklGTE5XL2owWHhmc29CCkIxRHpHTmNDeWtvOXVMYTVXU1J0eGhpSkJVTFdtenhTMmlzZDJDakZLeDBwMWJvbFZyb1VRRmZzWU03eDJVOHoKNGRvL0dOVkNmdmtEbEwzRWMzMzdRMUFKS1BYWTdaNVBNQVQxelVvUFBmd21SZ0NSeFBiMzdIZ2QwUzVucm11dgpHbHlFQ1JUd1JBMVYrV3lDOE5zOVJPQkQyNFR2V0ZUNU1zbTJvYlJOcGxNMldQQWlqcDI1NjVVMGsrdkhaTVE1CjdZTS9Wa0ZmaGh1TmNoT1htTUhENlN3NHhWQUpKbDZzcGEyblh3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFERXdUVlZWdVU1eWNuN0FsMXBSSXd3V1liUWRRWm9HakJYYUdaa3YKRldaWWFYQ09ZOU5VdERvSmQ3Rk4vV3BIVjdEbkVwSk05MElHaDEyNzI2N3FwaGs4d3VWbFNITi8vUkQ4RVJNNgoxSzdISTBGR2EwQlFJZlVybENBTi9VUlNBQ3VaOFpsVHBMVlE1Q2YyUmdZVUpZTGduZk9vc1NHd2lEM1U5dUQwCms5bmdubk5UQVNZUUpqbHBJa3FYeGlldmtqUkUxbjJxMXZJTEFvQ2JCQXNmY1J4bmxzZmhBVkdRU2R6cFFsWHgKREd3amVqZWJNdXgwRmxvL01kdjJwZ0pVNUFtdGpRTjhod3kxeTcyZktKb2RSU1pTSlF4Y0pNTW5sdExxQnFRdwpTdFNCemxkRDNmb0hGRmo4bW8xN09WR3ZkZ2JrbVJxeS90SE1kc2hXNUd3bm9DVT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
-  key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBMG0wamNKemVSancwazRFQzJLdWZmbUpsNHU4TjR5MU9EMkN3SUd5THoxdWVxazJKCjdJa2tlcjYvbW5sSTJ0d3p4bk0xUGdBN2RFa2xDMFhYdVRHODVweVB1T3Nla2ZyU016SUZMTlcvajBYeGZzb0IKQjFEekdOY0N5a285dUxhNVdTUnR4aGlKQlVMV216eFMyaXNkMkNqRkt4MHAxYm9sVnJvVVFGZnNZTTd4MlU4ego0ZG8vR05WQ2Z2a0RsTDNFYzMzN1ExQUpLUFhZN1o1UE1BVDF6VW9QUGZ3bVJnQ1J4UGIzN0hnZDBTNW5ybXV2CkdseUVDUlR3UkExVitXeUM4TnM5Uk9CRDI0VHZXRlQ1TXNtMm9iUk5wbE0yV1BBaWpwMjU2NVUwayt2SFpNUTUKN1lNL1ZrRmZoaHVOY2hPWG1NSEQ2U3c0eFZBSkpsNnNwYTJuWHdJREFRQUJBb0lCQUc2aG9yaGFRU0o4Rk1oWQpVNzdHdkp3ZDc2TllPOXpzdk5XbzUvQ2tJUDFzRmdkRHJQZ0hRbjZtT3Vaa1RjR0RkRlVwelJ4RDB2NVlWbm1PCnh0US9LaW0wdG50cVlqQXR4c1hUenBTNzdITFBPeUNGNC9TTXdzS1VpSXNDYldEbjhKckZaRkY2Sk0vM1RBMWgKc2MyeVRZYVFLTmw2QTd5eW1WNzNoaDR1RzhEcEdEOHMxRURPRWxidWNFT2NoVFl0THprQ09HNHA4M255L01NUwpBTnJwcGMvMExNTDFnVkcyZ2lrai9rV1ArNWV6WldVSnVoNTlGamwzMlRKOEZqQ3A0eGtkdGZQTlc1cGd6QTVVCjVFSmFrZ3ZTQWprZVBJdjhTV2V5YW5xTkdFNEtuekw2V1VCeTF2SjRtV1QxRU02VkZqWDAxbTJvTXFZcWFTbW8KVHVrK3BRRUNnWUVBM2JmYkNLTEdORWVoNGg2ZU03RHhIUjZHaUVIUmxNOGxTMk9FUzlSUkpMTDRwRFNZWWU1dwp0N3VzejIxbndIU1NDdXVKbXJvazZZL3IvTEFsUnZIaHVKWGpNVS9GUExLNktyajZQeDNpZC9RRHFERCtkVURrClJVWXRtVlZKZjV6c2xCSng4NU9memt1RjcxTmRxcDhlYUVYbU1uWEd2RDZtem5CUGVFRlB1VzhDZ1lFQTh2WlMKekhYTnRCNkdIczBJRVc0WUdaWGN3RGFOOUtZVnp0RWpyQ0ErNVltaGdYT0hoRlUrdjlPaGVpY2J4S3JsOStROApCQWRjOUhrc25lajdqS1YzK3VUYi83T3k5TXVBUG9sYThnUytyT09DeGszcmtPNjdERVRYNDkwbUxpTEg4WXFaCkNNQ2dabHp3UUFNVmRIclRvRXI5UEt4b1pZa2VyeDdIUjhIaG1SRUNnWUVBcUZpdVRkdFNCV1lTYTU5MTNhZlAKRzU0TzVpeWJscExHTFh6TmVjb25KbWRoMVVRK0k3V3BEa2pJeU9LNE1YQVJaNHM1K3lxMVZrWTZGNjRqVDcvZQo5SW1TYk9HMTBBV2d4MG1XY1JBZTRaZDhvMXM0Q2cyUWhXem91SkVDY292VE1nYmpVTi9aS2drOEUrREhzUUtLClV3QW43azV3N0lQaG9jT3pBNHNMbnE4Q2dZRUF5TFhzMkxOSTU4OS9oTnBrRytJVFRxK2EyYjgzcmkrMlBGQlIKWTlTUG9SZjlyKzg4dUhtamlOelB2UldwdnVKZmNGVy9ycVJXaWkvQVNBTThLNGhXZ1pHbW5LcGE0QmR0TGp4UwpRVFRpUC9rREE4ZERIMHZZZ2Q0dGF6UTZZa3FoV2t6ZzkzWUtEQVlqQXY2Skx0eDVEeVpqNVVlWVJxanNERWNrCjRZYXRVOEVDZ1lFQWg2UzZ0Uld2YUhCTzFpNG9VV1A5eFJSVmxBS0FOYkNTenJIdlA0TVpnbVVpTS9DWWxJTDAKclhvTlVHTUFUN3NQdmp5c0lDU3czazB2ZXdXSVdCOUhJSzBleHpJYjNTaGVXWVBXdTVQMXlsNWFMbjltNVdVVwovNndWMkpOWTIzaDdZMWtEWXVNQnNzb2dUaE1manR3NjFoTEg0cThRUFEwTHZWMXcrMVE5N1VRPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ==
+  cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUakNDQWphZ0F3SUJBZ0lRU0xJbjludEpDSXBKR1FSQzZwZzdGekFOQmdrcWhraUc5dzBCQVFzRkFEQXIKTVNrd0p3WURWUVFERXlCb2RXSXRZV2RsYm5RdFkyOXVkSEp2Ykd4bGNpNWtaV1poZFd4MExuTjJZekFnRncweQpNakF6TVRnd09EUTROVFphR0E4eU1USXlNRE14T1RBNE5EZzFObG93S3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuClpXNTBMV052Ym5SeWIyeHNaWEl1WkdWbVlYVnNkQzV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUIKRHdBd2dnRUtBb0lCQVFERURRZjdrY0ZhcW9DUjR2dnVDNjZxQ21iWkVtaHl6bmpReTc0QlpQTWY1OW1OSE4rbQpHZ3VkTzB4QzJ0UXVMZWhJcnQwR3BVVWtiMEhPbmdJQ0VKME9JdTRENmxaZ0x4QVlsam1BZ2FPQlJZV3R1MUlGCk1RUk9iKzFTaFhuNVBwK2ovdTBWZmFDOFo1ZXRpMEx1OU5NY1VxcURpQlFlS1dZQmkwSVVyd0w3QjBzOXlneDMKQk93K1NWaUlDWTZPWTd6YXY1STlJZUxkUy9ZdGd4R3Y5ZElhNXJZU3Yvcklvemg5TUlvY1ljekNCdUt4bGU1MApHdU9NNnZwbU5PQXJkSU04c2FTbzVibm9uSWZZOHROKzhkUG9zTUgwR3J0VGh6dDlLZ1QxUm1ZRkx4cVBKci9qCjV1aG42MHE4Y2prWlAvVlA5UGwzN1I5Wnlmd2dSZmNFZHc1UkFnTUJBQUdqYkRCcU1BNEdBMVVkRHdFQi93UUUKQXdJRm9EQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJdwpBREFyQmdOVkhSRUVKREFpZ2lCb2RXSXRZV2RsYm5RdFkyOXVkSEp2Ykd4bGNpNWtaV1poZFd4MExuTjJZekFOCkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQXJUREY2WEFTU0dBajBOOUhvRzE1RWVtalZ0L3lWSFRqN2YrL28xQk4KZzRFcHZneUVUQjVQUUVOR2NLY3NZQkxMc1pyWCtvTEJxcHFHRzdzRnh0UHJ6R3JUaEZpeUtpanc3ajh3TGg5ZgpjM3R1YVJ2bndQOGhDY1NYb1VBd2xDdGNXcG5BRnJTWDhWRUVKUDhyclVRS0F0VzlQcklzUjVZV1ducWlpU3BvCklKNmFkelNjWk1nbWNoRGNyaWtESnFEejVTZUtFZFhQaEV2MVFXclhzbkdFLzR6WHhzUUdXLzlraGkzZTVJajMKcGhGVjYxWXQva0pZRUg0QkFtdlFiWUFvNkFVVEVmOEZ5bEhVVVpIaUt2TzAxY25KaDFQaGF3KzlPZ2xscTl2VQpzWW9vdCtpdTVrYjRUK0puZjk3NTk5dEx0UDJ2cFRTMTVpZVYrODVVUXUxUUl3PT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+  key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBeEEwSCs1SEJXcXFBa2VMNzdndXVxZ3BtMlJKb2NzNTQwTXUrQVdUekgrZlpqUnpmCnBob0xuVHRNUXRyVUxpM29TSzdkQnFWRkpHOUJ6cDRDQWhDZERpTHVBK3BXWUM4UUdKWTVnSUdqZ1VXRnJidFMKQlRFRVRtL3RVb1Y1K1Q2Zm8vN3RGWDJndkdlWHJZdEM3dlRUSEZLcWc0Z1VIaWxtQVl0Q0ZLOEMrd2RMUGNvTQpkd1RzUGtsWWlBbU9qbU84MnIrU1BTSGkzVXYyTFlNUnIvWFNHdWEyRXIvNnlLTTRmVENLSEdITXdnYmlzWlh1CmRCcmpqT3I2WmpUZ0szU0RQTEdrcU9XNTZKeUgyUExUZnZIVDZMREI5QnE3VTRjN2ZTb0U5VVptQlM4YWp5YS8KNCtib1ordEt2SEk1R1QvMVQvVDVkKzBmV2NuOElFWDNCSGNPVVFJREFRQUJBb0lCQUZkY3h6WGZXWjRoWkhHZQpDRTJuZnduZTRMM1NhaURleVEraCt1VjhLcXNKRWZURDdSV0RmYkZ1L3lpN2d0bWhNMlZRSnNZVFY2Qkl3N1ppCnl0cEl0UFBidE55aHpDUElWUS9md1hmMlRQb0tGT3U2RVc2bXpSaDIzL1pwN0ZTWkIySjQ4d1VrbWovYW1jaUgKeWlmWmlVbVJ2TklvRFc3elc3Vk1iUUh5aXcxNUJzbTBybVB3RWpZYXZ2SHU2eU5mbEJVUlVLbm5acHY0QlZ2Rwp6RTZNV01aNVNGY0IxUldmS1lFNytoNTFSNm1nUXdJaDZiMzhXbmtQZjB0RWJsNHdYNytGVjFqdFdlV1JxS3dBCldEeU85YmZtYlh4ODgzRmYxTDRJSmtlN3FYVkU4V3AyakN1UWF5QmoydEp5UFoyMGprdFE3Q0tuN2lnVzdUYUYKRCtyZ0VRRUNnWUVBMTNHd1BIZmtxSFdyTnhQMmp1enUrby9OU3hCMFRvQXg0Nm1HcUhaWThnaUNYdUs2WWhQQgpXL3NnclA2YXdiZEwxSjRaWWJYSEl0V3dVdVFocjl1S3hTN003MkFqV2dGd2RuaW1ocnByRnRVSHBFRFlFWmJkCjhvSFlISUFPNm1oWVFDNDRUNDV6aDZHRU52U01UZ204TXRTM2pjUkFTVE4yV09lNnJsTFR6ZmtDZ1lFQTZQVEgKaEdUVEFDbHJqMFJXRU9XaGt6dEx0ZGVsNVdiQm9Vdno3TVd2dnRlQWdkS08zcnZKbzlkMjBQOTgzV1lKaFo5UAovQ1JHSk9GYndGZ1NNVTVZb2NKQVgrSmQvMkhVTGJwbkh4dFozMFlkc00xS2xvbG5qcU1PakViR2YwbEM3a3pPCkh6OSs0L0R4bnUydi9WMUVWRmowV2xCZnkyS09mNE5ya0tVbnVSa0NnWUFYakNLQ0NXeWhpUExrdXpiWW1rYm8KZGUwdlJpWWdLbHpKa0U3YWZNenQ3MFlvanNsbVROaDJjRFU3RXp6ZzdXTEpZMXBNMXF4a1AwemRVbmZvRzZ2SQpMM3hRc1laTG9ScWtxRDB6UG83VDJRYlR5ZzZUcFpTdW04aCtIUFVFWTlFNWVwUEhCai9VVkMvNlBiSlVHVFpMCnEvby84WEpCVGZHaWQvbHNjanNhS1FLQmdFS2ZsdHdIVmMwTEM0YnF2VTZSemRia3MyOXJJRGZ1WGx3NTg2WDQKbDUyVjFsdktreStpTnpYVGJsaXhhTTJNM0JaS0RMOEl4TUxSYk1NaXJQbEs5ZEExVk9IWFJKakFLc1YxTlA3UgpmSzk5UndxRWU5dDNxcFZCanV5UlpUMkwvMGRWMGZGZjRITmlPa2dBcEQ5cXlCcnpZZGJlZTdjWUZiYmtLQVF6Cko1d3BBb0dBYzR0K3F5djVPdElCcDBrU0phRHVMRzhhUFUrWHRXOTJNaTY5b3JrMWJOclIxZzBEVTZrMnIyZUoKczg3SitQQUlIUjhNVm10NlJWcUZvQkpyUzNueFZsNG5FcG02bGdyWStlWlpWQzgrcWFHamovQ0lRNWJlbDRnago4VFZidXRiVHZSN1QxSWpMSUdIdVNrVU1lVWgyME5RZXREaXBZTVY3NElRZEYxdHZkclE9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t
 ---
-# Source: hub/templates/rbac/cluster-role-auth-server.yaml
+# Source: hub-agent/templates/rbac/cluster-role-auth-server.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: hub-agent-auth-server
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
 rules:
   # Access Control RBACs.
@@ -78,16 +78,16 @@ rules:
       - list
       - watch
 ---
-# Source: hub/templates/rbac/cluster-role-controller.yaml
+# Source: hub-agent/templates/rbac/cluster-role-controller.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: hub-agent-controller
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
 rules:
   # Access Control RBACs.
@@ -197,16 +197,16 @@ rules:
     verbs:
       - get
 ---
-# Source: hub/templates/rbac/cluster-role-bindings.yaml
+# Source: hub-agent/templates/rbac/cluster-role-bindings.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: hub-agent-controller
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -217,16 +217,16 @@ subjects:
     name: hub-agent-controller
     namespace: default
 ---
-# Source: hub/templates/rbac/cluster-role-bindings.yaml
+# Source: hub-agent/templates/rbac/cluster-role-bindings.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: hub-agent-auth-server
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -237,17 +237,17 @@ subjects:
     name: hub-agent-auth-server
     namespace: default
 ---
-# Source: hub/templates/services.yaml
+# Source: hub-agent/templates/services.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: hub-agent-controller
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
   annotations:
     hub.traefik.io/ingress-controller: none
@@ -260,17 +260,17 @@ spec:
     app: hub-agent
     component: controller
 ---
-# Source: hub/templates/services.yaml
+# Source: hub-agent/templates/services.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: hub-agent-auth-server
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
   annotations:
     hub.traefik.io/ingress-controller: none
@@ -283,17 +283,17 @@ spec:
     app: hub-agent
     component: auth-server
 ---
-# Source: hub/templates/deployment-auth-server.yaml
+# Source: hub-agent/templates/deployment-auth-server.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hub-agent-auth-server
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
   annotations:
     hub.traefik.io/ingress-controller: none
@@ -336,17 +336,17 @@ spec:
             - --listen-addr=:80
             - "--log-level=debug"
 ---
-# Source: hub/templates/deployment-controller.yaml
+# Source: hub-agent/templates/deployment-controller.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hub-agent-controller
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
   annotations:
     hub.traefik.io/ingress-controller: none
@@ -393,17 +393,17 @@ spec:
               - key: key
                 path: key.pem
 ---
-# Source: hub/templates/deployment-tunnel.yaml
+# Source: hub-agent/templates/deployment-tunnel.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hub-agent-tunnel
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
     app.kubernetes.io/component: tunnel
   annotations:
@@ -432,17 +432,17 @@ spec:
             - --token=plop
             - "--log-level=debug"
 ---
-# Source: hub/templates/admission-controller.yaml
+# Source: hub-agent/templates/admission-controller.yaml
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   name: hub
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
 webhooks:
   - name: hub-agent.default.svc
@@ -451,7 +451,7 @@ webhooks:
         name: hub-agent-controller
         namespace: default
         path: /
-      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQUtWMlFIMW4xN3VnbkwwUFR1Y0F3anN3RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpFM01UTXhPVFV6V2hnUE1qRXlNakF6TVRneE16RTVOVE5hTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQTBtMGpjSnplUmp3MGs0RUMyS3VmZm1KbDR1OE40eTFPRDJDd0lHeUx6MXVlcWsySgo3SWtrZXI2L21ubEkydHd6eG5NMVBnQTdkRWtsQzBYWHVURzg1cHlQdU9zZWtmclNNeklGTE5XL2owWHhmc29CCkIxRHpHTmNDeWtvOXVMYTVXU1J0eGhpSkJVTFdtenhTMmlzZDJDakZLeDBwMWJvbFZyb1VRRmZzWU03eDJVOHoKNGRvL0dOVkNmdmtEbEwzRWMzMzdRMUFKS1BYWTdaNVBNQVQxelVvUFBmd21SZ0NSeFBiMzdIZ2QwUzVucm11dgpHbHlFQ1JUd1JBMVYrV3lDOE5zOVJPQkQyNFR2V0ZUNU1zbTJvYlJOcGxNMldQQWlqcDI1NjVVMGsrdkhaTVE1CjdZTS9Wa0ZmaGh1TmNoT1htTUhENlN3NHhWQUpKbDZzcGEyblh3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFERXdUVlZWdVU1eWNuN0FsMXBSSXd3V1liUWRRWm9HakJYYUdaa3YKRldaWWFYQ09ZOU5VdERvSmQ3Rk4vV3BIVjdEbkVwSk05MElHaDEyNzI2N3FwaGs4d3VWbFNITi8vUkQ4RVJNNgoxSzdISTBGR2EwQlFJZlVybENBTi9VUlNBQ3VaOFpsVHBMVlE1Q2YyUmdZVUpZTGduZk9vc1NHd2lEM1U5dUQwCms5bmdubk5UQVNZUUpqbHBJa3FYeGlldmtqUkUxbjJxMXZJTEFvQ2JCQXNmY1J4bmxzZmhBVkdRU2R6cFFsWHgKREd3amVqZWJNdXgwRmxvL01kdjJwZ0pVNUFtdGpRTjhod3kxeTcyZktKb2RSU1pTSlF4Y0pNTW5sdExxQnFRdwpTdFNCemxkRDNmb0hGRmo4bW8xN09WR3ZkZ2JrbVJxeS90SE1kc2hXNUd3bm9DVT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUakNDQWphZ0F3SUJBZ0lRU0xJbjludEpDSXBKR1FSQzZwZzdGekFOQmdrcWhraUc5dzBCQVFzRkFEQXIKTVNrd0p3WURWUVFERXlCb2RXSXRZV2RsYm5RdFkyOXVkSEp2Ykd4bGNpNWtaV1poZFd4MExuTjJZekFnRncweQpNakF6TVRnd09EUTROVFphR0E4eU1USXlNRE14T1RBNE5EZzFObG93S3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuClpXNTBMV052Ym5SeWIyeHNaWEl1WkdWbVlYVnNkQzV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUIKRHdBd2dnRUtBb0lCQVFERURRZjdrY0ZhcW9DUjR2dnVDNjZxQ21iWkVtaHl6bmpReTc0QlpQTWY1OW1OSE4rbQpHZ3VkTzB4QzJ0UXVMZWhJcnQwR3BVVWtiMEhPbmdJQ0VKME9JdTRENmxaZ0x4QVlsam1BZ2FPQlJZV3R1MUlGCk1RUk9iKzFTaFhuNVBwK2ovdTBWZmFDOFo1ZXRpMEx1OU5NY1VxcURpQlFlS1dZQmkwSVVyd0w3QjBzOXlneDMKQk93K1NWaUlDWTZPWTd6YXY1STlJZUxkUy9ZdGd4R3Y5ZElhNXJZU3Yvcklvemg5TUlvY1ljekNCdUt4bGU1MApHdU9NNnZwbU5PQXJkSU04c2FTbzVibm9uSWZZOHROKzhkUG9zTUgwR3J0VGh6dDlLZ1QxUm1ZRkx4cVBKci9qCjV1aG42MHE4Y2prWlAvVlA5UGwzN1I5Wnlmd2dSZmNFZHc1UkFnTUJBQUdqYkRCcU1BNEdBMVVkRHdFQi93UUUKQXdJRm9EQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJdwpBREFyQmdOVkhSRUVKREFpZ2lCb2RXSXRZV2RsYm5RdFkyOXVkSEp2Ykd4bGNpNWtaV1poZFd4MExuTjJZekFOCkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQXJUREY2WEFTU0dBajBOOUhvRzE1RWVtalZ0L3lWSFRqN2YrL28xQk4KZzRFcHZneUVUQjVQUUVOR2NLY3NZQkxMc1pyWCtvTEJxcHFHRzdzRnh0UHJ6R3JUaEZpeUtpanc3ajh3TGg5ZgpjM3R1YVJ2bndQOGhDY1NYb1VBd2xDdGNXcG5BRnJTWDhWRUVKUDhyclVRS0F0VzlQcklzUjVZV1ducWlpU3BvCklKNmFkelNjWk1nbWNoRGNyaWtESnFEejVTZUtFZFhQaEV2MVFXclhzbkdFLzR6WHhzUUdXLzlraGkzZTVJajMKcGhGVjYxWXQva0pZRUg0QkFtdlFiWUFvNkFVVEVmOEZ5bEhVVVpIaUt2TzAxY25KaDFQaGF3KzlPZ2xscTl2VQpzWW9vdCtpdTVrYjRUK0puZjk3NTk5dEx0UDJ2cFRTMTVpZVYrODVVUXUxUUl3PT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
     sideEffects: None
     admissionReviewVersions: [ "v1" ]
     rules:
@@ -476,17 +476,17 @@ webhooks:
         resources: [ "ingressroutes" ]
         scope: "Namespaced"
 ---
-# Source: hub/templates/admission-controller.yaml
+# Source: hub-agent/templates/admission-controller.yaml
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: hub
   namespace: default
   labels:
-    app.kubernetes.io/name: hub
-    helm.sh/chart: hub-0.10.0
+    app.kubernetes.io/name: hub-agent
+    helm.sh/chart: hub-agent-0.11.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.11.0
     app.kubernetes.io/instance: hub-agent
 webhooks:
   - name: hub-agent.default.svc
@@ -495,7 +495,7 @@ webhooks:
         name: hub-agent-controller
         namespace: default
         path: /validation
-      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUekNDQWplZ0F3SUJBZ0lSQUtWMlFIMW4xN3VnbkwwUFR1Y0F3anN3RFFZSktvWklodmNOQVFFTEJRQXcKS3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13SUJjTgpNakl3TXpFM01UTXhPVFV6V2hnUE1qRXlNakF6TVRneE16RTVOVE5hTUNzeEtUQW5CZ05WQkFNVElHaDFZaTFoCloyVnVkQzFqYjI1MGNtOXNiR1Z5TG1SbFptRjFiSFF1YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0MKQVE4QU1JSUJDZ0tDQVFFQTBtMGpjSnplUmp3MGs0RUMyS3VmZm1KbDR1OE40eTFPRDJDd0lHeUx6MXVlcWsySgo3SWtrZXI2L21ubEkydHd6eG5NMVBnQTdkRWtsQzBYWHVURzg1cHlQdU9zZWtmclNNeklGTE5XL2owWHhmc29CCkIxRHpHTmNDeWtvOXVMYTVXU1J0eGhpSkJVTFdtenhTMmlzZDJDakZLeDBwMWJvbFZyb1VRRmZzWU03eDJVOHoKNGRvL0dOVkNmdmtEbEwzRWMzMzdRMUFKS1BYWTdaNVBNQVQxelVvUFBmd21SZ0NSeFBiMzdIZ2QwUzVucm11dgpHbHlFQ1JUd1JBMVYrV3lDOE5zOVJPQkQyNFR2V0ZUNU1zbTJvYlJOcGxNMldQQWlqcDI1NjVVMGsrdkhaTVE1CjdZTS9Wa0ZmaGh1TmNoT1htTUhENlN3NHhWQUpKbDZzcGEyblh3SURBUUFCbzJ3d2FqQU9CZ05WSFE4QkFmOEUKQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQwpNQUF3S3dZRFZSMFJCQ1F3SW9JZ2FIVmlMV0ZuWlc1MExXTnZiblJ5YjJ4c1pYSXVaR1ZtWVhWc2RDNXpkbU13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFERXdUVlZWdVU1eWNuN0FsMXBSSXd3V1liUWRRWm9HakJYYUdaa3YKRldaWWFYQ09ZOU5VdERvSmQ3Rk4vV3BIVjdEbkVwSk05MElHaDEyNzI2N3FwaGs4d3VWbFNITi8vUkQ4RVJNNgoxSzdISTBGR2EwQlFJZlVybENBTi9VUlNBQ3VaOFpsVHBMVlE1Q2YyUmdZVUpZTGduZk9vc1NHd2lEM1U5dUQwCms5bmdubk5UQVNZUUpqbHBJa3FYeGlldmtqUkUxbjJxMXZJTEFvQ2JCQXNmY1J4bmxzZmhBVkdRU2R6cFFsWHgKREd3amVqZWJNdXgwRmxvL01kdjJwZ0pVNUFtdGpRTjhod3kxeTcyZktKb2RSU1pTSlF4Y0pNTW5sdExxQnFRdwpTdFNCemxkRDNmb0hGRmo4bW8xN09WR3ZkZ2JrbVJxeS90SE1kc2hXNUd3bm9DVT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUakNDQWphZ0F3SUJBZ0lRU0xJbjludEpDSXBKR1FSQzZwZzdGekFOQmdrcWhraUc5dzBCQVFzRkFEQXIKTVNrd0p3WURWUVFERXlCb2RXSXRZV2RsYm5RdFkyOXVkSEp2Ykd4bGNpNWtaV1poZFd4MExuTjJZekFnRncweQpNakF6TVRnd09EUTROVFphR0E4eU1USXlNRE14T1RBNE5EZzFObG93S3pFcE1DY0dBMVVFQXhNZ2FIVmlMV0ZuClpXNTBMV052Ym5SeWIyeHNaWEl1WkdWbVlYVnNkQzV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUIKRHdBd2dnRUtBb0lCQVFERURRZjdrY0ZhcW9DUjR2dnVDNjZxQ21iWkVtaHl6bmpReTc0QlpQTWY1OW1OSE4rbQpHZ3VkTzB4QzJ0UXVMZWhJcnQwR3BVVWtiMEhPbmdJQ0VKME9JdTRENmxaZ0x4QVlsam1BZ2FPQlJZV3R1MUlGCk1RUk9iKzFTaFhuNVBwK2ovdTBWZmFDOFo1ZXRpMEx1OU5NY1VxcURpQlFlS1dZQmkwSVVyd0w3QjBzOXlneDMKQk93K1NWaUlDWTZPWTd6YXY1STlJZUxkUy9ZdGd4R3Y5ZElhNXJZU3Yvcklvemg5TUlvY1ljekNCdUt4bGU1MApHdU9NNnZwbU5PQXJkSU04c2FTbzVibm9uSWZZOHROKzhkUG9zTUgwR3J0VGh6dDlLZ1QxUm1ZRkx4cVBKci9qCjV1aG42MHE4Y2prWlAvVlA5UGwzN1I5Wnlmd2dSZmNFZHc1UkFnTUJBQUdqYkRCcU1BNEdBMVVkRHdFQi93UUUKQXdJRm9EQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJdwpBREFyQmdOVkhSRUVKREFpZ2lCb2RXSXRZV2RsYm5RdFkyOXVkSEp2Ykd4bGNpNWtaV1poZFd4MExuTjJZekFOCkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQXJUREY2WEFTU0dBajBOOUhvRzE1RWVtalZ0L3lWSFRqN2YrL28xQk4KZzRFcHZneUVUQjVQUUVOR2NLY3NZQkxMc1pyWCtvTEJxcHFHRzdzRnh0UHJ6R3JUaEZpeUtpanc3ajh3TGg5ZgpjM3R1YVJ2bndQOGhDY1NYb1VBd2xDdGNXcG5BRnJTWDhWRUVKUDhyclVRS0F0VzlQcklzUjVZV1ducWlpU3BvCklKNmFkelNjWk1nbWNoRGNyaWtESnFEejVTZUtFZFhQaEV2MVFXclhzbkdFLzR6WHhzUUdXLzlraGkzZTVJajMKcGhGVjYxWXQva0pZRUg0QkFtdlFiWUFvNkFVVEVmOEZ5bEhVVVpIaUt2TzAxY25KaDFQaGF3KzlPZ2xscTl2VQpzWW9vdCtpdTVrYjRUK0puZjk3NTk5dEx0UDJ2cFRTMTVpZVYrODVVUXUxUUl3PT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
     sideEffects: None
     admissionReviewVersions: [ "v1" ]
     rules:

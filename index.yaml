@@ -3,7 +3,25 @@ entries:
   hub-agent:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.259845278Z"
+    created: "2022-06-03T08:40:40.87372187Z"
+    description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
+    digest: 599c22ce05f17cdfbb3f6e4a71f0a48b34b84a603f9a93c261abe593e9d4760a
+    home: https://github.com/traefik/hub-helm-chart
+    keywords:
+    - hub
+    kubeVersion: '>= 1.14.0-0'
+    maintainers:
+    - name: mmatur
+    name: hub-agent
+    sources:
+    - https://github.com/traefik/hub-agent-kubernetes
+    type: application
+    urls:
+    - https://helm.traefik.io/hub/hub-agent-0.18.0.tgz
+    version: 0.18.0
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2022-06-03T08:40:40.872965452Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: 828db32bc9980862cd5f45fa0e0ed936b34578b8bfbb285ad74a367e078d961a
     home: https://github.com/traefik/hub-helm-chart
@@ -21,7 +39,7 @@ entries:
     version: 0.17.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.259122668Z"
+    created: "2022-06-03T08:40:40.872253436Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: a08380a2e539dc378bafb2a264f4d3224fad8ace2879143fdb52cec49dd52b2e
     home: https://github.com/traefik/hub-helm-chart
@@ -39,7 +57,7 @@ entries:
     version: 0.16.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.257410444Z"
+    created: "2022-06-03T08:40:40.87157892Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: d6c902fd0e05fe6bfa28c343c2d577dabc33c8cc7f24eb23b497b398d7184157
     home: https://github.com/traefik/hub-helm-chart
@@ -57,7 +75,7 @@ entries:
     version: 0.16.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.256045125Z"
+    created: "2022-06-03T08:40:40.870876004Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: 4283a4a5519939c948ecfd228c595b4e0c6a6c0f05413b993d2927f01d17792d
     home: https://github.com/traefik/hub-helm-chart
@@ -75,7 +93,7 @@ entries:
     version: 0.16.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.255358016Z"
+    created: "2022-06-03T08:40:40.870158087Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: b0874642598ac8c8353981bc41f87b88f4fa1d727535afc229611741e075c760
     home: https://github.com/traefik/hub-helm-chart
@@ -93,7 +111,7 @@ entries:
     version: 0.15.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.254641706Z"
+    created: "2022-06-03T08:40:40.86941237Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: 6151012cc4f69df615d83330101aabc5b45ff86a0d5342a20241286c129d7d69
     home: https://github.com/traefik/hub-helm-chart
@@ -111,7 +129,7 @@ entries:
     version: 0.15.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.253938896Z"
+    created: "2022-06-03T08:40:40.868602151Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: 367325bbe1eb52af4b48600396c37264ef92385fc95dc8c264b72d73c2387e03
     home: https://github.com/traefik/hub-helm-chart
@@ -129,7 +147,7 @@ entries:
     version: 0.14.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.252671478Z"
+    created: "2022-06-03T08:40:40.867862534Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: 9f309a7d9e733d7c07288eaf383c4044040883adf7b58eee32f97a8b5c5910dc
     home: https://github.com/traefik/hub-helm-chart
@@ -147,7 +165,7 @@ entries:
     version: 0.14.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.251751465Z"
+    created: "2022-06-03T08:40:40.866263198Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: 22e1134854aaba39f817c23feda270b29505e5e7996ffc45df050c813c552dbd
     home: https://github.com/traefik/hub-helm-chart
@@ -165,7 +183,7 @@ entries:
     version: 0.13.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.251051456Z"
+    created: "2022-06-03T08:40:40.865366577Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: f159a6333944bab7a291996812f9e1bb8a12203b771c36f2df24e0bf319fce9a
     home: https://github.com/traefik/hub-helm-chart
@@ -183,7 +201,7 @@ entries:
     version: 0.12.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.250285545Z"
+    created: "2022-06-03T08:40:40.864167449Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: 3fe16d7e3f3bbccf29c705f462a8c947fb0b52a5e526150984a1b7d757447e21
     home: https://github.com/traefik/hub-helm-chart
@@ -201,7 +219,7 @@ entries:
     version: 0.12.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.249593935Z"
+    created: "2022-06-03T08:40:40.863452833Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: a5c30551829883e3762bca95d97da92a4c72195c11f686c3d0ecebbc1f804be0
     home: https://github.com/traefik/hub-helm-chart
@@ -219,7 +237,7 @@ entries:
     version: 0.11.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-05-24T12:54:45.248938726Z"
+    created: "2022-06-03T08:40:40.862777917Z"
     description: 'Traefik Hub is an all-in-one global networking platform that provides contextual observability, end-to-end connectivity, and zero-trust security for all of your mission-critical Kubernetes workloads. '
     digest: a0e37b9369d93a2b97fe125477b969da88753b476c3bcd1ed284ecaece81b78a
     home: https://github.com/traefik/hub-helm-chart
@@ -235,4 +253,4 @@ entries:
     urls:
     - https://helm.traefik.io/hub/hub-agent-0.11.0.tgz
     version: 0.11.0
-generated: "2022-05-24T12:54:45.248078614Z"
+generated: "2022-06-03T08:40:40.861893897Z"

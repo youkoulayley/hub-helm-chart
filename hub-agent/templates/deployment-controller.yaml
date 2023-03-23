@@ -61,7 +61,11 @@ spec:
             - --acp-server.auth-server-addr=http://hub-agent-auth-server.{{ .Release.Namespace }}.svc.cluster.local
             {{ if .Values.controllerDeployment.traefik -}}
             {{ if .Values.controllerDeployment.traefik.metricsURL -}}
+            {{ if .Values.traefikNamespace -}}
+            - --traefik.metrics-url={{ .Values.controllerDeployment.traefik.metricsURL | replace "$(POD_NAMESPACE)" .Values.traefikNamespace }}
+            {{ else }}
             - --traefik.metrics-url={{ .Values.controllerDeployment.traefik.metricsURL }}
+            {{ end }}
             {{ end -}}
             {{ end -}}
           {{- with .Values.controllerDeployment.args -}}

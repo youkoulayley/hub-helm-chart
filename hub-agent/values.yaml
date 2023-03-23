@@ -9,6 +9,8 @@ image:
 # User token to access to hub
 token: ""
 
+traefikNamespace: ""
+
 # You can reference a secret for the Hub Token, this takes precedence over `token`
 # tokenSecretRef:
 #    name: hub-token
